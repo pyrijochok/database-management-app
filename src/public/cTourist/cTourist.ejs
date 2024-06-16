@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourists</title>
+    <style>
+        #touristProps{
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Tourists collection management</h2>
+    <a href="/">Back</a>
+    <button onclick="window.location.href = 'http://localhost:3000/tourists/add' ">Add tourist</button>
+    <button onclick="window.location.href = 'http://localhost:3000/tourists/update' ">Update tourist</button>
+    <button onclick="window.location.href = 'http://localhost:3000/tourists/delete' ">Delete tourist</button>
+    <h3>Tourists collection data</h3>
+    <% if (typeof message!=='undefined') { %>
+        <p><%= message %></p>
+      <% } else { %>
+          <p></p>
+      <% } %>
+    <ul id="touristsList">
+        <% for( let i = 0; i < tourists.length; i++ ) { %>
+            <% let year = tourists[i].Birth_Date.getFullYear() %>
+            <% let month = tourists[i].Birth_Date.getMonth()+1 %>
+            <% let day = tourists[i].Birth_Date.getDate() %>
+            <% if (day<10) { %>
+                 <% day = `0${day}` %>
+            <% } else { %>
+                <% day = `${day}` %>
+            <% } %>
+
+            <% if (month<10) { %>
+                <% month = `0${month}` %>
+            <% } else { %>
+                <% month = `${month}` %>
+            <% } %>
+            <% let date = `${year}-${month}-${day}` %>
+            <ul id="touristProps">
+                <li>Full name: <%= tourists[i].Full_Name %></li>
+                <li>Birth date: <%= date %> </li>
+                <li>Passport number: <%= tourists[i].Passport_Number %></li>
+                <li>ID: <%= tourists[i]._id %></li> 
+            </ul>
+         <% } %>
+    </ul>
+    
+   
+</body>
+</html>

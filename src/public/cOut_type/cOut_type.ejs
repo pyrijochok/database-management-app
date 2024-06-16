@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outtypes</title>
+    <style>
+        #outtypesProps{
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Out_type collection management</h2>
+    <a href="/">Back</a>
+    <button onclick="window.location.href = 'http://localhost:3000/outtypes/add' ">Add outtype</button>
+    <button onclick="window.location.href = 'http://localhost:3000/outtypes/update' ">Update outtype</button>
+    <button onclick="window.location.href = 'http://localhost:3000/outtypes/delete' ">Delete outtype</button>
+    <h3>Out_type collection data</h3>
+    <% if (typeof message!=='undefined') { %>
+        <p><%= message %></p>
+      <% } else { %>
+          <p></p>
+      <% } %>
+    <ul id="outtypesList">
+        <% for( let i = 0; i < outtypes.length; i++ ) { %>
+            <ul id="outtypesProps">
+                <li>Name: <%= outtypes[i].Name %></li>
+                <li>ID: <%= outtypes[i]._id %></li> 
+            </ul>
+         <% } %>
+    </ul>
+    
+   
+</body>
+</html>

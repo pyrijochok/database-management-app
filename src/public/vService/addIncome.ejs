@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Income</title>
+    <style>
+        input{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/incomes/add" method="post" id="addIncomef">
+        <% if (typeof invalidData !== 'undefined') { %>
+            <label for="Payment_Date">Payment date:</label>
+            <input type="date" name="Payment_Date" required value="<%= invalidData.Payment_Date %>">
+            <label for="Expiration_Date">Expiration date:</label>
+            <input type="date" name="Expiration_Date" required value="<%= invalidData.Expiration_Date %>">
+            <label for="Sum">Sum:</label>
+            <input type="number" name="Sum" required value="<%= invalidData.Sum %>">
+            <label for="IdTourist">TouristID:</label>
+            <input type="text" name="IdTourist" required value="<%= invalidData.IdTourist %>">
+            <label for="IdService_type">Service_typeID:</label>
+            <input type="text" name="IdService_type" required value="<%= invalidData.IdService_type %>">
+        <% } else { %>
+            <label for="Payment_Date">Payment date:</label>
+            <input type="date" name="Payment_Date" required>
+            <label for="Expiration_Date">Expiration date:</label>
+            <input type="date" name="Expiration_Date" required>
+            <label for="Sum">Sum:</label>
+            <input type="number" name="Sum" required>
+            <label for="IdTourist">TouristID:</label>
+            <input type="text" name="IdTourist" required >
+            <label for="IdService_type">Service_typeID:</label>
+            <input type="text" name="IdService_type" required >
+        <% } %>
+        <button type="submit">Add Income</button>
+    </form>
+    <!-- <div class="message-box"></div> -->
+    <% if (typeof message!=='undefined') { %>
+      <p><%= message %></p>
+    <% } else { %>
+        <p></p>
+    <% } %>
+    <a href="/incomes">Back</a>
+
+</body>
+</html>

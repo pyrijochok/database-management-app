@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlays</title>
+    <style>
+        #outlayProps{
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Outlays collection management</h2>
+    <a href="/">Back</a>
+    <button onclick="window.location.href = 'http://localhost:3000/outlays/add' ">Add outlay</button>
+    <button onclick="window.location.href = 'http://localhost:3000/outlays/update' ">Update outlay</button>
+    <button onclick="window.location.href = 'http://localhost:3000/outlays/delete' ">Delete outlay</button>
+    <h3>Outlay collection data</h3>
+    <% if (typeof message!=='undefined') { %>
+        <p><%= message %></p>
+      <% } else { %>
+          <p></p>
+      <% } %>
+    <ul id="outlaysList">
+        <% for( let i = 0; i < outlays.length; i++ ) { %>
+            <% let year = outlays[i].Date.getFullYear() %>
+            <% let month = outlays[i].Date.getMonth()+1 %>
+            <% let day = outlays[i].Date.getDate() %>
+            <% if (day<10) { %>
+                 <% day = `0${day}` %>
+            <% } else { %>
+                <% day = `${day}` %>
+            <% } %>
+
+            <% if (month<10) { %>
+                <% month = `0${month}` %>
+            <% } else { %>
+                <% month = `${month}` %>
+            <% } %>
+            <% let date = `${year}-${month}-${day}` %>
+            <ul id="outlayProps">
+                <li>Date: <%= date %></li>
+                <li>Sum: <%= outlays[i].Sum %> </li>
+                <li>OuttypeID: <%= outlays[i].IdOut_type %></li>
+                <li>ID: <%= outlays[i]._id %></li> 
+            </ul>
+         <% } %>
+    </ul>
+    
+   
+</body>
+</html>

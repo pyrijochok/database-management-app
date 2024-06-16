@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Tourist</title>
+    <style>
+         input{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+
+
+    <form action="/tourists/update/find" method="post" id="findTouristf">
+        <label for="_id">ID of tourist you want to update:</label>
+        <% if (typeof invalidId !== 'undefined') { %>
+            <input type="text" name="_id" id="idField" required value="<%= invalidId %>">
+            <% } else { %>
+                <input type="text" name="_id" id="idField" required>
+             <% } %>
+        <button type="submit" >Find tourist to update</button>
+    </form>
+    <% if (typeof id !== 'undefined' && typeof tourist !== 'undefined' ) { %>
+        <form action="/tourists/update/<%= id %>?_method=PUT" method="POST" id="updateTouristf">
+            <p>Update information</p>
+            <label for="Full_Name">Full name:</label>
+            <input type="text" name="Full_Name" id="Full_Name" value="<%= tourist.Full_Name %>" required>
+            <label for="Birth_Date">Birth date:</label>
+            <% let year = tourist.Birth_Date.getFullYear() %>
+            <% let month = tourist.Birth_Date.getMonth()+1 %>
+            <% let day = tourist.Birth_Date.getDate() %>
+            <% if (day<10) { %>
+                 <% day = `0${day}` %>
+            <% } else { %>
+                <% day = `${day}` %>
+            <% } %>
+
+            <% if (month<10) { %>
+                <% month = `0${month}` %>
+            <% } else { %>
+                <% month = `${month}` %>
+            <% } %>
+            <% let date = `${year}-${month}-${day}` %>
+            <input type="date" name="Birth_Date" id="Birth_Date" value="<%= date  %>" required>
+            <label for="Passport_Number">Passport number:</label>
+            <input type="text" name="Passport_Number" id="Passport_Number" value="<%= tourist.Passport_Number %>" required>
+            <button type="submit">Update Tourist</button>
+        </form>
+    <% } %>
+    
+
+    <% if (typeof message!=='undefined') { %>
+      <p><%= message %></p>
+    <% } else { %>
+        <p></p>
+    <% } %>
+    <a href="/tourists">Back</a>
+     
+</body>
+</html>

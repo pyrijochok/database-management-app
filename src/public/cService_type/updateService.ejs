@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update service</title>
+    <style>
+         input{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/services/update/find" method="post" id="findServicef">
+        <label for="_id">ID of service you want to update:</label>
+        <% if (typeof invalidId !== 'undefined') { %>
+            <input type="text" name="_id" id="idField" required value="<%= invalidId %>">
+        <% } else { %>
+            <input type="text" name="_id" id="idField" required>
+        <% } %>
+        <button type="submit" >Find service to update</button>
+    </form>
+
+    <% if (typeof id !== 'undefined' && typeof service !== 'undefined' ) { %>
+        <form action="/services/update/<%= id %>?_method=PUT" method="POST" id="updateServicef">
+            <p>Update information</p>
+            <label for="Name">Name:</label>
+            <input type="text" name="Name" id="Name" value="<%= service.Name %>">
+            <button type="submit">Update service</button>
+        </form>
+    <% } %>
+    
+
+    <% if (typeof message!=='undefined') { %>
+      <p><%= message %></p>
+    <% } else { %>
+        <p></p>
+    <% } %>
+    <a href="/services">Back</a>
+    
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Tourist</title>
+    <style>
+        input{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/tourists/add" method="post" id="addTouristf">
+        <% if (typeof invalidData !== 'undefined') { %>
+            <label for="Full_Name">Full name:</label>
+            <input type="text" name="Full_Name" required value="<%= invalidData.Full_Name %>">
+            <label for="Birth_Date">Birth date:</label>
+            <input type="date" name="Birth_Date" required value="<%= invalidData.Birth_Date %>">
+            <label for="Passport_Number">Passport number:</label>
+            <input type="text" name="Passport_Number" required value="<%= invalidData.Passport_Number %>">
+        <% } else { %>
+            <label for="Full_Name">Full name:</label>
+            <input type="text" name="Full_Name" required>
+            <label for="Birth_Date">Birth date:</label>
+            <input type="date" name="Birth_Date" required>
+            <label for="Passport_Number">Passport number:</label>
+            <input type="text" name="Passport_Number" required>
+        <% } %>
+        <button type="submit">Add Tourist</button>
+    </form>
+    <!-- <div class="message-box"></div> -->
+    <% if (typeof message!=='undefined') { %>
+      <p><%= message %></p>
+    <% } else { %>
+        <p></p>
+    <% } %>
+    <a href="/tourists">Back</a>
+
+</body>
+</html>

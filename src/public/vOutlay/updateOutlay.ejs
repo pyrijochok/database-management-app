@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Outlay</title>
+    <style>
+         input{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+
+
+    <form action="/outlays/update/find" method="post" id="findOutlayf">
+        <label for="_id">ID of outlay you want to update:</label>
+        <% if (typeof invalidId !== 'undefined') { %>
+            <input type="text" name="_id" id="idField" required value="<%= invalidId %>">
+            <% } else { %>
+                <input type="text" name="_id" id="idField" required>
+             <% } %>
+        <button type="submit" >Find outlay to update</button>
+    </form>
+    <% if (typeof id !== 'undefined' && typeof outlay !== 'undefined' ) { %>
+        <form action="/outlays/update/<%= id %>?_method=PUT" method="POST" id="updateOutlayf">
+            <p>Update information</p>
+                <% let year = outlay.Date.getFullYear() %>
+                <% let month = outlay.Date.getMonth()+1 %>
+                <% let day = outlay.Date.getDate() %>
+                <% if (day<10) { %>
+                     <% day = `0${day}` %>
+                <% } else { %>
+                    <% day = `${day}` %>
+                <% } %>
+                <% if (month<10) { %>
+                    <% month = `0${month}` %>
+                <% } else { %>
+                    <% month = `${month}` %>
+                <% } %>
+                <% let date = `${year}-${month}-${day}` %>
+                <label for="Date">Date:</label>
+                <input type="date" name="Date" required value="<%= date %>">
+                <label for="Sum">Sum:</label>
+                <input type="number" name="Sum" required value="<%= outlay.Sum %>">
+                <label for="IdOut_type">OuttypeID:</label>
+                <input type="text" name="IdOut_type" required value="<%= outlay.IdOut_type %>">
+            <button type="submit">Update Outlay</button>
+        </form>
+    <% } %>
+    
+
+    <% if (typeof message!=='undefined') { %>
+      <p><%= message %></p>
+    <% } else { %>
+        <p></p>
+    <% } %>
+    <a href="/outlays">Back</a>
+     
+</body>
+</html>

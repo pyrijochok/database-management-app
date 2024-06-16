@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update outtype</title>
+    <style>
+         input{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/outtypes/update/find" method="post" id="findOuttypef">
+        <label for="_id">ID of outtype you want to update:</label>
+        <% if (typeof invalidId !== 'undefined') { %>
+            <input type="text" name="_id" id="idField" required value="<%= invalidId %>">
+        <% } else { %>
+            <input type="text" name="_id" id="idField" required>
+        <% } %>
+        <button type="submit" >Find outtype to update</button>
+    </form>
+
+    <% if (typeof id !== 'undefined' && typeof outtype !== 'undefined' ) { %>
+        <form action="/outtypes/update/<%= id %>?_method=PUT" method="POST" id="updateOuttypef">
+            <p>Update information</p>
+            <label for="Name">Name:</label>
+            <input type="text" name="Name" id="Name" value="<%= outtype.Name %>" required>
+            <button type="submit">Update outtype</button>
+        </form>
+    <% } %>
+    
+
+    <% if (typeof message!=='undefined') { %>
+      <p><%= message %></p>
+    <% } else { %>
+        <p></p>
+    <% } %>
+    <a href="/outtypes">Back</a>
+    
+</body>
+</html>

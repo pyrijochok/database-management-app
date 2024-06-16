@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Outlay</title>
+    <style>
+        input{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/outlays/add" method="post" id="addOutlayf">
+        <% if (typeof invalidData !== 'undefined') { %>
+            <label for="Date">Date:</label>
+            <input type="date" name="Date" required value="<%= invalidData.Date %>">
+            <label for="Sum">Sum:</label>
+            <input type="number" name="Sum" required value="<%= invalidData.Sum %>">
+            <label for="IdOut_type">OuttypeID:</label>
+            <input type="text" name="IdOut_type" required value="<%= invalidData.IdOut_type %>">
+        <% } else { %>
+            <label for="Date">Date:</label>
+            <input type="date" name="Date" required>
+            <label for="Sum">Sum:</label>
+            <input type="number" name="Sum" required>
+            <label for="IdOut_type">OuttypeID:</label>
+            <input type="text" name="IdOut_type" required>
+        <% } %>
+        <button type="submit">Add Outlay</button>
+    </form>
+    <!-- <div class="message-box"></div> -->
+    <% if (typeof message!=='undefined') { %>
+      <p><%= message %></p>
+    <% } else { %>
+        <p></p>
+    <% } %>
+    <a href="/outlays">Back</a>
+
+</body>
+</html>

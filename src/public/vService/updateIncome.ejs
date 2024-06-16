@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Income</title>
+    <style>
+         input{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+
+
+    <form action="/incomes/update/find" method="post" id="findIncomef">
+        <label for="_id">ID of income you want to update:</label>
+        <% if (typeof invalidId !== 'undefined') { %>
+            <input type="text" name="_id" id="idField" required value="<%= invalidId %>">
+            <% } else { %>
+                <input type="text" name="_id" id="idField" required>
+             <% } %>
+        <button type="submit" >Find income to update</button>
+    </form>
+    <% if (typeof id !== 'undefined' && typeof income !== 'undefined' ) { %>
+        <form action="/incomes/update/<%= id %>?_method=PUT" method="POST" id="updateOutlayf">
+            <p>Update information</p>
+                <% let pyear = income.Payment_Date.getFullYear() %>
+                <% let pmonth = income.Payment_Date.getMonth()+1 %>
+                <% let pday = income.Payment_Date.getDate() %>
+                <% if (pday<10) { %>
+                     <% pday = `0${pday}` %>
+                <% } else { %>
+                    <% pday = `${pday}` %>
+                <% } %>
+    
+                <% if (pmonth<10) { %>
+                    <% pmonth = `0${pmonth}` %>
+                <% } else { %>
+                    <% pmonth = `${pmonth}` %>
+                <% } %>
+                <% let pdate = `${pyear}-${pmonth}-${pday}` %>
+    
+                <% let eyear = income.Expiration_Date.getFullYear() %>
+                <% let emonth = income.Expiration_Date.getMonth()+1 %>
+                <% let eday = income.Expiration_Date.getDate() %>
+                <% if (eday<10) { %>
+                     <% eday = `0${eday}` %>
+                <% } else { %>
+                    <% eday = `${eday}` %>
+                <% } %>
+    
+                <% if (emonth<10) { %>
+                    <% emonth = `0${emonth}` %>
+                <% } else { %>
+                    <% emonth = `${emonth}` %>
+                <% } %>
+                <% let edate = `${eyear}-${emonth}-${eday}` %>
+                <label for="Payment_Date">Payment date:</label>
+                <input type="date" name="Payment_Date" required value="<%= pdate %>">
+                <label for="Expiration_Date">Expiration date:</label>
+                <input type="date" name="Expiration_Date" required value="<%= edate %>">
+                <label for="Sum">Sum:</label>
+                <input type="number" name="Sum" required value="<%= income.Sum %>">
+                <label for="IdTourist">TouristID:</label>
+                <input type="text" name="IdTourist" required value="<%= income.IdTourist %>">
+                <label for="IdService_type">Service_typeID:</label>
+                <input type="text" name="IdService_type" required value="<%= income.IdService_type %>">
+            <button type="submit">Update Income</button>
+        </form>
+    <% } %>
+
+    
+
+    <% if (typeof message!=='undefined') { %>
+      <p><%= message %></p>
+    <% } else { %>
+        <p></p>
+    <% } %>
+    <a href="/incomes">Back</a>
+     
+</body>
+</html>

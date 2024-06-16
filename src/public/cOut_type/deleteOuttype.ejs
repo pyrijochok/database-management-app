@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete outtype</title>
+    <style>
+         input{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/outtypes/delete?_method=DELETE" method="POST" id="deleteOuttypef">
+        <label for="_id">ID of outtype you want to delete:</label>
+        <% if (typeof invalidId !== 'undefined') { %>
+            <input type="text" name="_id" id="idField" required value="<%= invalidId %>">
+        <% } else { %>
+            <input type="text" name="_id" id="idField" required>
+        <% } %>
+        <button type="submit" >Delete outtype</button>
+    </form>
+
+    <% if (typeof message !=='undefined') { %>
+      <p><%= message %></p>
+    <% } else { %>
+        <p></p>
+    <% } %>
+
+    <a href="/outtypes">Back</a>
+     
+</body>
+</html>

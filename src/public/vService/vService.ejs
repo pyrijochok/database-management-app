@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incomes</title>
+    <style>
+        #incomeProps{
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Incomes collection management</h2>
+    <a href="/">Back</a>
+    <button onclick="window.location.href = 'http://localhost:3000/incomes/add' ">Add income</button>
+    <button onclick="window.location.href = 'http://localhost:3000/incomes/update' ">Update income</button>
+    <button onclick="window.location.href = 'http://localhost:3000/incomes/delete' ">Delete income</button>
+    <h3>Income collection data</h3>
+    <% if (typeof message!=='undefined') { %>
+        <p><%= message %></p>
+      <% } else { %>
+          <p></p>
+      <% } %>
+    <ul id="incomesList">
+        <% for( let i = 0; i < incomes.length; i++ ) { %>
+            <% let pyear = incomes[i].Payment_Date.getFullYear() %>
+            <% let pmonth = incomes[i].Payment_Date.getMonth()+1 %>
+            <% let pday = incomes[i].Payment_Date.getDate() %>
+            <% if (pday<10) { %>
+                 <% pday = `0${pday}` %>
+            <% } else { %>
+                <% pday = `${pday}` %>
+            <% } %>
+
+            <% if (pmonth<10) { %>
+                <% pmonth = `0${pmonth}` %>
+            <% } else { %>
+                <% pmonth = `${pmonth}` %>
+            <% } %>
+            <% let pdate = `${pyear}-${pmonth}-${pday}` %>
+
+            <% let eyear = incomes[i].Expiration_Date.getFullYear() %>
+            <% let emonth = incomes[i].Expiration_Date.getMonth()+1 %>
+            <% let eday = incomes[i].Expiration_Date.getDate() %>
+            <% if (eday<10) { %>
+                 <% eday = `0${eday}` %>
+            <% } else { %>
+                <% eday = `${eday}` %>
+            <% } %>
+
+            <% if (emonth<10) { %>
+                <% emonth = `0${emonth}` %>
+            <% } else { %>
+                <% emonth = `${emonth}` %>
+            <% } %>
+            <% let edate = `${eyear}-${emonth}-${eday}` %>
+            <ul id="incomeProps">
+                <li>Payment date: <%= pdate %></li>
+                <li>Expiration date: <%= edate %></li>
+                <li>Sum: <%= incomes[i].Sum %> </li>
+                <li>TouristID: <%= incomes[i].IdTourist %></li>
+                <li>Service_typeID: <%= incomes[i].IdService_type %></li>
+                <li>ID: <%= incomes[i]._id %></li> 
+            </ul>
+         <% } %>
+    </ul>
+    
+   
+</body>
+</html>
